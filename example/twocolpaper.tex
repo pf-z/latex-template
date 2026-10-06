@@ -1,0 +1,106 @@
+\documentclass{../class/twocolpaper}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{hyperref}
+
+\title{A Simple Example of a Two-Column Academic Paper}
+
+\author{
+    Author A$^{1,*}$, Author B$^{1,2}$, Author C$^{2}$
+    \\
+    \small
+    \parbox{0.95\linewidth}{
+        \centering
+        $^{1}$ \itshape Affiliation, University, Address, City, Postcode, State/Province, Country
+        \\
+        $^{2}$ \itshape Affiliation, University, Address, City, Postcode, State/Province, Country
+        \\
+        $^{*}$ Corresponding author: author@example.com
+    }
+}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This paper provides a simple example of using the
+\texttt{twocolpaper} document class. The template is designed
+for academic manuscripts in a compact two-column format.
+The abstract spans both columns, while the main text is
+automatically arranged in two columns.
+\end{abstract}
+
+\section{Introduction}
+
+Two-column layouts are widely used in academic publications
+because they provide a compact presentation of scientific
+content. This example demonstrates the basic usage of the
+\texttt{twocolpaper} class.
+
+The document class is based on the standard \texttt{article}
+class and provides a fixed A4 two-column layout. Users can
+write a manuscript using the standard \LaTeX{} commands without
+having to manually configure the page geometry.
+
+\section{Equation}
+
+Consider a simple quadratic function,
+
+\begin{equation}
+    y = ax^2 + bx + c.
+    \label{eq:quadratic}
+\end{equation}
+
+For $a=1$, $b=2$, and $c=1$, Eq.~\ref{eq:quadratic} becomes
+$y=x^2+2x+1$.
+
+\section{Table}
+
+Table~\ref{tab:example} gives several example values calculated
+from Eq.~\ref{eq:quadratic}.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Example values calculated from Eq.~\ref{eq:quadratic}.}
+    \label{tab:example}
+    \begin{tabular}{ccccc}
+        \toprule
+        $a$ & $b$ & $c$ & $x$ & $y$ \\
+        \midrule
+        1.0 & 2.0 & 1.0 & $-2$ & 1 \\
+        1.0 & 2.0 & 1.0 & $-1$ & 0 \\
+        1.0 & 2.0 & 1.0 & 0   & 1 \\
+        1.0 & 2.0 & 1.0 & 1   & 4 \\
+        1.0 & 2.0 & 1.0 & 2   & 9 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{Figure}
+
+Figure~\ref{fig:example} illustrates an example figure
+placeholder.
+
+\begin{figure}[htbp]
+    \centering
+    \fbox{\rule{0pt}{40mm}\rule{0.85\columnwidth}{0pt}}
+    \caption{Example figure.}
+    \label{fig:example}
+\end{figure}
+
+
+\section{Citation}
+
+Mathematical typesetting and document preparation are important
+components of scientific writing~\cite{lamport1994}.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
