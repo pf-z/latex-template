@@ -246,40 +246,30 @@
 % 8. 摘要与关键词
 % ============================================================
 
-% ---- 8.1 自定义横线 ----
-
-% 用于摘要和关键词区域的分隔线
-\newcommand{\diyline}{%
-    \vspace{0.8em}
-    \noindent\rule{\textwidth}{0.3pt}\par
-    \vspace{0.8em}
-}
-
-
-% ---- 8.2 摘要 ----
+% ---- 8.1 摘要 ----
 
 % 自定义摘要环境
 \renewenvironment{abstract}{
-    \diyline
+    \vspace{1.3em}
     \noindent\textbf{Abstract}\par
     \vspace{0.8em}
     \noindent\ignorespaces
 }{
     \par
-    \vspace{0.8em}
+    \vspace{1.3em} % 摘要下方统一留出 1.3em 间距
 }
 
 
-% ---- 8.3 关键词 ----
+% ---- 8.2 关键词 ----
 
 % 自定义关键词环境
 \newenvironment{keywords}{
+    \vspace{-0.5em} % 抵消部分上留白，使得摘要与关键词之间保持 0.8em 的合适间距 (1.3em - 0.5em = 0.8em)
     \noindent\textbf{Keywords: }
     \ignorespaces
 }{
     \par
-    \vspace{-0.5em}
-    \diyline
+    \vspace{1.3em}
 }
 
 
