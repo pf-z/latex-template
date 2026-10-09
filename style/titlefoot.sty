@@ -1,0 +1,47 @@
+% titlefoot.sty
+% 功能：Beamer 页脚自动切换
+%   - 正文页：author / section / 页码
+%   - 标题页、目录页：只显示 title
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{titlefoot}[2025/01/01 Beamer footline auto-switch]
+
+\RequirePackage{etoolbox}
+
+% ===== 正文页脚（默认） =====
+\setbeamertemplate{footline}{
+  \leavevmode
+  \hbox{
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,center]{author in head/foot}
+      \usebeamerfont{author in head/foot}\insertshortauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=.34\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}
+      \usebeamerfont{title in head/foot}\insertsection
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[wd=.33\paperwidth,ht=2.5ex,dp=1ex,center]{date in head/foot}
+      \usebeamerfont{date in head/foot}\insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}
+  }
+}
+
+% ===== 标题页/目录页专用页面样式 =====
+\makeatletter
+\def\ps@navigation@titlepage{%
+  \setbeamertemplate{footline}{%
+    \leavevmode
+    \hbox{%
+      \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}%
+    }%
+  }%
+  \@nameuse{ps@navigation}%
+}
+\makeatother
+
+% ===== 自动应用到标题页 =====
+\addtobeamertemplate{title page}{\thispagestyle{navigation@titlepage}}{}
+
+% ===== 自动应用到目录页 =====
+\pretocmd{\tableofcontents}{\thispagestyle{navigation@titlepage}}{}{}
+
+\endinput
