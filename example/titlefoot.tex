@@ -1,0 +1,140 @@
+% example.tex
+% 编译方式：xelatex example.tex
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+\usepackage{fontspec}
+\setsansfont{Cochin}
+\usepackage{xeCJK}
+\setCJKmainfont{Songti SC}
+
+\usetheme{Boadilla}
+\usepackage{../style/titlefoot}  % 必须在主题后面才生效
+
+% ===== 元信息 =====
+\title[短标题：Beamer 页脚自动切换]{Beamer 页脚自动切换示例}
+\subtitle{正文 / 标题页 / 目录页 三种页脚}
+\author[张三]{张三\inst{1} \and 李四\inst{2}}
+\institute[XX 大学]{
+  \inst{1} XX 大学\quad XX 学院 \\
+  \inst{2} XX 大学\quad XX 学院
+}
+\date[2026-10-10]{2026 年 10 月 10 日}
+
+\begin{document}
+
+% =========================================================
+% 1. 标题页：应只显示 short title
+% =========================================================
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% =========================================================
+% 2. 目录页：应只显示 short title
+% =========================================================
+\begin{frame}
+  \frametitle{目录}
+  \tableofcontents
+\end{frame}
+
+% =========================================================
+% 3. 第一节：正文页脚应显示 author / section / 页码
+% =========================================================
+\section{第一节：基本用法}
+
+\begin{frame}
+  \frametitle{普通正文页}
+  这一页的页脚应显示：
+  \begin{itemize}
+    \item 左侧：\texttt{\textbackslash insertshortauthor}，即“张三”
+    \item 中间：\texttt{\textbackslash insertsection}，即“第一节：基本用法”
+    \item 右侧：\texttt{\textbackslash insertframenumber/\textbackslash inserttotalframenumber}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{带列表的正文页}
+  \begin{enumerate}
+    \item 第一项
+    \item 第二项
+    \item 第三项
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{带公式的正文页}
+  \begin{equation}
+    E = mc^2
+  \end{equation}
+  \[
+    \int_{-\infty}^{+\infty} e^{-x^2}\,\mathrm{d}x = \sqrt{\pi}
+  \]
+\end{frame}
+
+% =========================================================
+% 4. 第二节：验证 section 自动切换
+% =========================================================
+\section{第二节：页脚切换验证}
+
+\begin{frame}
+  \frametitle{进入第二节后的页脚}
+  此时中间栏应自动变为“第二节：页脚切换验证”。
+\end{frame}
+
+\begin{frame}
+  \frametitle{再一页}
+  继续验证页码递增。
+\end{frame}
+
+% =========================================================
+% 5. 第三节：分栏、块环境等复杂内容
+% =========================================================
+\section{第三节：复杂内容}
+
+\begin{frame}
+  \frametitle{分栏布局}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \begin{block}{左栏}
+        左侧内容。页脚仍然正常显示。
+      \end{block}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{block}{右栏}
+        右侧内容。
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{代码页}
+\begin{verbatim}
+\setbeamertemplate{footline}{
+  \insertshortauthor \hfill \insertsection \hfill
+  \insertframenumber/\inserttotalframenumber
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+  \frametitle{警告与示例块}
+  \begin{alertblock}{注意}
+    标题页和目录页的页脚只显示短标题。
+  \end{alertblock}
+  \begin{exampleblock}{示例}
+    正文页页脚分为三栏：作者、节名、页码。
+  \end{exampleblock}
+\end{frame}
+
+% =========================================================
+% 7. 结束页
+% =========================================================
+\begin{frame}
+  \thispagestyle{navigation@titlepage} % 使用首页页脚样式
+  \centering
+  \Huge 谢谢！
+\end{frame}
+
+\end{document}
