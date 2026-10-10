@@ -13,6 +13,13 @@ Personal LaTeX document classes and templates for academic writing.
 | [`twocolpaper`](class/twocolpaper.cls) | A4 two-column academic paper template based on `article` |
 | [`journalpaper`](class/journalpaper.cls) | A4 single-column academic paper template based on `extarticle` |
 
+
+## Packages
+
+| Package | Description |
+|---|---|
+| [`titlefoot`](style/titlefoot.sty) | Beamer footline that switches automatically between body pages and title/TOC pages |
+
 ## Structure
 
 ```text
@@ -20,9 +27,12 @@ latex-template/
 ├── class/
 │   ├── twocolpaper.cls
 │   └── journalpaper.cls
+├── style/
+│   └── titlefoot.sty
 ├── example/
-│   ├── twocolpaper-example.tex
-│   ├── journalpaper-example.tex
+│   ├── twocolpaper.tex
+│   ├── journalpaper.tex
+│   ├── titlefoot.tex
 │   └── references.bib
 ├── README.md
 ├── LICENSE
@@ -30,6 +40,8 @@ latex-template/
 ```
 
 ## Usage
+
+### Document classes
 
 Copy the desired `.cls` file into your LaTeX project and use it with
 the standard `\documentclass` command:
@@ -46,10 +58,51 @@ or
 
 See the [`example/`](example/) directory for complete examples.
 
+### `titlefoot` (Beamer footline)
+
+Provides a three-column footline for **body pages** and a single
+centered footline for **title / TOC / closing pages**:
+
+| Page type | Footline content |
+|---|---|
+| Body page | `\insertshortauthor` \| `\insertsection` \| `\insertframenumber/\inserttotalframenumber` |
+| Title / TOC / closing page | `\insertshorttitle` only |
+
+**Load after the theme**, otherwise the theme overwrites `footline`:
+
+```latex
+\usetheme{Boadilla}
+\usepackage{../style/titlefoot}
+```
+
+**Switch inside the frame** — do not hook `\titlepage` / `\tableofcontents`,
+as the footline is drawn at frame end and would be reset:
+
+```latex
+\begin{frame}
+  \thispagestyle{navigation@titlepage}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \thispagestyle{navigation@titlepage}
+  \frametitle{Contents}
+  \tableofcontents
+\end{frame}
+```
+
+The same command works for a closing page. Do **not** use `[plain]` on
+these frames — it hides the footline.
+
+See [`example/titlefoot.tex`](example/titlefoot.tex)
+for a complete example.
+
 ## Requirements
 
 - LaTeX
-- pdfLaTeX
+- pdfLaTeX (for `twocolpaper` / `journalpaper`)
+- XeLaTeX or LuaLaTeX (for `titlefoot`, which relies on system fonts
+  when used with `xeCJK` / `fontspec`)
 - BibTeX
 
 The templates use standard LaTeX packages for mathematics, figures,
